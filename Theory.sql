@@ -120,11 +120,33 @@ Syntax : SELECT RTRIM('FIGO    ') AS remove.
        
        : SELECT RTRIM(LTRIM(column_name)) FROM table_name;		//Removes Left and Right spaces both
        
-       
 
+AGGREGATE Functions :																				16/12/22
+1.COUNT : Gives the number of data present in the table.
+SELECT COUNT(*)from table_name;
+SELECT COUNT(column_name)FROM table_name;
 
+2.SUM : It gives the total value by adding all the data.
+SELECT SUM(column_name)FROM table_name;
+SELECT SUM(column_name)AS total FROM table_name;
 
+3.MAX : Gives the maximum value from the column.
+SELECT MAX(column_name)FROM table_name;
 
+4.MIN : GIves the minimum value from the column.
+SELECT MIN(column_name)FROM table_name;
+
+5.AVG : Gives the average value of the column.
+SELECT AVG(column_name)FROM table_name.
+
+NOTE : If data is present in the Column we cannot change from varchar to int.
+ALTER TABLE table_name MODIFY COLUMN column_name int;
+
+	: But we can change from int to varchar from the existing column.
+    ALTER TABLE table_name MODIFY COLUMN column_name varchar(20);
+    
+6.DISTINCT : Used to avoid the Duplicate Values from the Table.
+SELECT DISTINCT(column_name)from table_name;
 
 
 

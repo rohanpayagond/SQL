@@ -57,6 +57,41 @@ select substr(company_name,3,6)from laptop;
 insert into laptop values(21,'Lava   ',32658,16,256,'i5',10,'    Blackish Whit',12.8,3);
 select ltrim(color)from laptop;
 select rtrim(company_name)from laptop;
+select rtrim(ltrim(company_name))from laptop;
+select ltrim('Lava   ')as remove;
+select rtrim('    Blackish Whit')as remove;
 
+select count(price)from laptop;
+select count(sl_no)from laptop;
+select count(RAM)from laptop;
+
+select sum(price)from laptop;
+select sum(ROM) from laptop;
+select sum(warranty)from laptop;
+select sum(sl_no)as TOTAL from laptop;
+
+select min(ROM)from laptop;
+select min(sl_no)from laptop;
+select min(windows)from laptop;
+
+select max(RAM)from laptop;
+select max(ROM)from laptop;
+select max(windows)from laptop;
+
+select avg(display_inches)from laptop;
+select avg(RAM)from laptop;
+select avg(sl_no)from laptop;
+
+insert into laptop values(19,'Infinix',37584,2,300,'i5',9,'Matt Black',13.7,1);
+select distinct(company_name) from laptop;
+select distinct(windows)from laptop;
+select distinct(RAM)from laptop;
+
+alter table laptop modify column company_name int;
+alter table laptop modify column processor bigint;
+
+alter table laptop modify column RAM varchar(20);
+alter table laptop modify column warranty varchar(10);
+alter table laptop modify column price varchar(20);
 
 
