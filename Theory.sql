@@ -148,8 +148,18 @@ ALTER TABLE table_name MODIFY COLUMN column_name int;
 6.DISTINCT : Used to avoid the Duplicate Values from the Table.
 SELECT DISTINCT(column_name)from table_name;
 
-
-
+CONSTRAINTS : Ued to Limit the type of Data by inserting data into the table.	(COLUMN-LEVEL CONSTRAINTS)			19/12/22
+1) NOT NULL : Cannot accept any NULl values but can accept DUplicate values.
+Syntax : CREATE TABLE cricket(id int not null,type varchar(20) not null,players_name varchar(20));
+		: DESC cricket;
+        
+2) UNIQUE : Cannot accept Duplicate values but can accept null values.
+SYntax : CREATE TABLE olymic_games(id int not null,games varchra(20) unique,country varchar(20) not null unique);
+        
+ 3) CHECK : To limit the Range of value.
+ SYntax : CREATE TABLE shoes(id int unique,brand varchar(20) not null unique,price bigint,check (price>=500));
+		: INSERT INTO shoes VALUES(1,'Adidas',5000);
+        : INSERT INTO shoes VALUES(2,'Puma',499);
 		
 
 
