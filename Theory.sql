@@ -160,7 +160,46 @@ SYntax : CREATE TABLE olymic_games(id int not null,games varchra(20) unique,coun
  SYntax : CREATE TABLE shoes(id int unique,brand varchar(20) not null unique,price bigint,check (price>=500));
 		: INSERT INTO shoes VALUES(1,'Adidas',5000);
         : INSERT INTO shoes VALUES(2,'Puma',499);
+        : CREATE TABLE games(id int not null,name varchar(30) unique,no_of_players int,prize_money int,
+			check(no_of_players>=11) and prize_money>100000));
+		: INSERT INTO games VALUES(1,'Cricket',10,100005);
 		
+        
+PRIMARY KEY : It Uniquely identifies Each and Every row of the Table.				   (TABLE-LEVEL CONSTRAINTS)		20/12/22															
+			By default it have NOT NULL and UNIQUE Constraints.
+            Only ONE Primary is allowed for each Table.
+            When Primary Key is used for Multiple Columns is called COMPOSITE Primary Key.
+            
+Syntax : CREATE TABLE apartments(id int primary key,a_name varchar(20) not null,
+		 location varchar(30) not null,no_of_rooms int not null);
+         INSERT INTO apartments VALUES(1,'Prestige','BTM',4);
+         
+         CREATE TABLE hotel_name(id int,h_name varchar(40),location varchar(33) not null,no_of_workers int not null,
+         ratings int not null,primary(id,h_name));
+         INSERT INTO hotel VALUES(1,'Gokul','BTM',24,4);
+         INSERT INTO hotel VALUES(1,'Udupi','JAYANAGAR',21,7);
+         
+         
+FOREIGN KEY : Foreign Key will ALways refers to the PRIMARY KEY of a Table.
+			 Primary Key present in Parent Table.
+             Foreign Key present in Child Table.
+             Cannot DROP Primary Key Table Bcoz it will be Referring to FOreign Key.
+             
+Syntax : CREATE TABLE bank_details(id int not null,b_name varchar(20),b_id int primary key ,b_location varchar(30),
+		  no_of_customers int notn null);
+          
+          CREATE TABLE cust_details(id int not null,c_name varchar(50),b_id int,balance bigint not null,
+           location varchar(30) unique,foreign key(b_id) references bank_details (b_id));
+
+
+
+
+
+
+
+
+
+
 
 
 
