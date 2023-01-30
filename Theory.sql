@@ -54,7 +54,7 @@ False	True	False
 False	False	False
 True	True	True
 Syntax : UPDATE table_name SET column_name = ' ' WHERE column_name = '  ' AND column_name = ' '; 
-		:DELETE FROM table_name WHERE column_name = ' '; AND column_name = ' ';
+		:DELETE FROM table_name WHERE column_name = ' ' AND column_name = ' ';
         
 
 OR : If ONE CONDITION is True then it returns TRUE value.
@@ -190,18 +190,122 @@ Syntax : CREATE TABLE bank_details(id int not null,b_name varchar(20),b_id int p
           
           CREATE TABLE cust_details(id int not null,c_name varchar(50),b_id int,balance bigint not null,
            location varchar(30) unique,foreign key(b_id) references bank_details (b_id));
+           
+           
+DATE FUNCTIONS : day of year,day of month, quarter,add date,day of week.
+				SELECT dayofyear('2022-12-22');			format('YYYY-MM-DD;);
+				
+                SELECT dayofmonth('2022-04-15') AS day;----------------day will be printed
+                SELECT dayname('2000-06-10);------------day will be printed.
+                SELECT datediff('2022-12-20','2022-04-13')-----------gives the difference btwn 2dates.
+                SELECT quarter('2022-09-25');----------
+                
+                SELECT adddate('2022-11-20', interval 5day);----------(2022-11-15..adds 5day);
+                SELECT adddate('2022-10-27', interval -5day);---------(2022-10-22)..removes 5day);
+
+syntax : CREATE TABLE movie(id int not null,m_name varchar(30),release_date DATE,created_by varchar(30)default 'Sunil',created at time stamp);
+		
+
+For ADDING CONSTRAINTS to the Existing Column
+Syntax : ALTER TABLE table_name ADD CONSTRAINT alias name UNIQUE(column_name);
+
+		CREATE TABLE freedom_fighter(id inr,name varchar(20),birth_place varchar(20),birth_date date,region ,)
+		ALTER TABLE freedom_fighter ADD CONSTRAINT freedom_fight_uk UNIQUE(name);
+        ALTER TABLE freedom_fighter ADD COLUMN age int not null;
+        ALTER TABLE freedom_fighter ADD CONSTRAINT age_check CHECK(age>=20);
+        ALTER TABLE freedom_fighter ADD CONSTRAINT freedom_pk PRIMARY KEY(id);
+        ALTER TABLE freedom_fighter ADD CONSTRAINT 
+        
+For DROPPING CONSTRAINTS from Existing Table.	
+		ALTER TABLE freedom_fighter DROP CONSTRAINT freedom_figh_uk;
+        ALTER TABLE freedom_fighter DROP CONSTRAINT age_check;
+        ALTER TABLE freedom_fighter DROP PRIMARY KEY;
+        
+
+		
+LPAD 	: ADDING data to the existing Data at the LeftSide.
+		: FInal length should be greater than original string length.
+SYntax	: SELECT LPAD (originalstring,finallengthofstring,valuetobeadded);
+		: SELECT LPAD('XWORKZ',15,'BTM');
+RPAD : 
+Syntax	: SELECT RPAD('xworkz',10,'rrr');
+
+
+GROUP BY : It is used to group the identical data into Single Value.
+Synatx	: SELECT COUNT (*),region FROM freedom_fighters GROUP BY region;
+		: SELECT MAX(balance),acc_type FROM bank_data GROUP BY acc_type;
+        
+
+HAVING : It is used to Filter the Data whatever Group By returns.Cannot be used to filter Aggregate Data.
+		: SELECT COUNT(*),as total,acc_type FROM bank_data GROUP BY acc_type.
+		: SELECT MAX(balance)AS max_amt,acc_type FROM bank_data GROUP BY acc_type HAVING max_amt <4564874;
+
+
+VIEWS : It is an Virtual Table and can Access the Subset of Columns from Table.View doesnt have its own Data.
+Syntax : CREATE VIEW viewname AS SELECT * FROM table_name;
+		: CREATE VIEW ban_view AS SELECT * FROM bank_data;
+
+
+JOINS : IT joins the 2Tables with same data on some conditions.
+1) INNER JOIN : It returns the same data on some Column Condition.
+Syntax : SELECT * FROM table_name INNER JOIN table_name ON CONDITION;
+	   : SELECT * FROM a INNER JOIN b ON a.id=b.id;
+       : SELECT * FROM a INNER JOIN b ON a.name=b.name;
+       
+       For joining 3Columns;
+       : SELECT * FROM a INNER JOIN b ON a.id=b.id INNER JOIN c ON b.id=c.id;
+       : SELECT * DROM a INNER JOIN b ON a.name=b.name INNER JOIN c ON b.name=c.name;
+
+
+LEFT JOIN : It returns All the ROW from the Left Table.
+		  : It returns ALL the Row from the Left Table And Same Data From Right Table.
+Syntax : SELECT * FROM d LEFT JOIN e on d.id=e.id;
+		:  SELECT * FROM d LEFT JOIN e on d.id=e.id LEFT JOIN c on c.id=e.id;----------For 3Tables.
+        
+        
+RIGHT JOIN : It returns All the Row from the Right Table.
+Syntax : SELECT * FROM d RIGHT JOIN e on d.id=e.id;
+		: SELECT * FROM e RIGHT JOIN d on e.name=d.name;
+
+
+CROSS JOIN : It joins Each and every Row of 1st Table is Joined with Each and every Row of 2nd Table.
+Syntax : SELECT * FROM table_name,table_name2;        
+
+LOCK : 
+Syntax : Lock TABLE table_name read;
+UNBLOCK_TABLES;
+
+
+How to find the Duplicate Values from the Table.
+SELECT COUNT(b_id), b_id FROM cust_info GROUP BY b_id HAVING COUNT(b_id)>1; 
+
+EVEN AND ODD RECORDS : 
+Syntax : SELECT * FROM cust_info WHERE MOD(id,2)=0;
 
 
 
+SUBQUERIES : 
+Subquery is called query in a query.
+Subquery ,Inner query,Nested query.
+Subquery will be always Executed First.
+The result of subquery will be passed to main query.
+Syntax : SELECT b_name FROM bank_info WHERE b_id =(SELECT b_id FROM cust_info WHERE c_name='Raghu');
+		: SELECT column_name FROm table_name WHERE column_name=(SELECT column_name FROM table_name2 WHERE column_name='Data');
+        
+		: SELECT column_name FROm table_name WHERE column_name IN (SELECT column_name FROM table_name2 WHERE column_name IN 'Data','Data2','Data3');
+
+		: UPDATE bank_info SET loan_type ='Deactive' WHERE b_id in(SELECT b_id FROM cust_info WHERE c_id IN(SELECT c_id FROM loan_info WHERE loan_type = 'Agricultural loan'));
+		
+		: DELETE FROM loan_info WHERE c_id=(SELECT c_id FROM cust_info WHERE b_id =(SELECT b_id FROM bank_info WHERE b_name='Karnataka Bank')); 
 
 
+CREATE TABLE cricket(id int primary key AUTO_INCREMENT,series_name varchar(30),type ENUM('Test','ODI','T20')NOT NULL,overs int);
+SELECT * FROM cricket;
 
-
-
-
-
-
-
+INSERT INTO cricket(series_name,type,overs)VALUES('PaytmODI','ODI',50);
+INSERT INTO cricket(series_name,type,overs)VALUES('IPL',3,20);
+INSERT INTO cricket(series_name,type,overs)VALUES('Test',1,40);
+INSERT INTO cricket(series_name,type,overs)VALUES('Biglash',2,35);
 
 
 

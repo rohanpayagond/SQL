@@ -87,5 +87,9 @@ SELECT * FROM cars ORDER BY Price_Lakhs DESC;
 SELECT * FROM cars ORDER BY Car_Name DESC;
 
  SELECT UPPER (Car_Name)AS converted FROM cars;
+ 
+ 
+
+ 
 
 
